@@ -1,0 +1,53 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jun 28, 2025, 10:27:49 AM
+    Author     : Mimman
+*/
+
+
+.left-pane {
+    -fx-background-color: #A020F0; 
+    -fx-alignment: center;
+    -fx-padding: 50px;
+}
+
+.title-label {
+    -fx-text-fill: white;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.right-pane {
+    -fx-background-color: #F4F4F4; 
+    -fx-padding: 50px;
+    -fx-alignment: center;
+}
+
+.text-field {
+    -fx-pref-width: 200px;
+    -fx-border-color: #A020F0;
+    -fx-border-width: 1px;
+    -fx-background-radius: 3px;
+    -fx-border-radius: 3px;
+}
+
+.button {
+    -fx-pref-width: 80px;
+    -fx-padding: 5 10 5 10;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.login-button {
+    -fx-background-color: #A020F0;
+    -fx-text-fill: white;
+}
+
+.cancel-button {
+    -fx-background-color: transparent;
+    -fx-border-color: #A020F0;
+    -fx-text-fill: #A020F0;
+}
