@@ -33,13 +33,13 @@
                <children>
                   <VBox fx:id="vbox" alignment="CENTER" layoutX="-9.0" prefHeight="400.0" prefWidth="253.0" spacing="4.0">
                      <children>
-                        <TextField fx:id="username11" prefHeight="30.0" prefWidth="220.0" promptText="Username" styleClass="text-field" />
-                        <TextField fx:id="username112" prefHeight="30.0" prefWidth="220.0" promptText="Name" styleClass="text-field" />
-                        <TextField fx:id="username" prefHeight="30.0" prefWidth="220.0" promptText="Phone" styleClass="text-field" />
-                        <PasswordField fx:id="password" prefHeight="30.0" prefWidth="220.0" promptText="Password" />
-                        <TextField fx:id="username1" prefHeight="30.0" prefWidth="220.0" promptText="Account No." styleClass="text-field" />
-                        <DatePicker fx:id="datepicer" prefHeight="28.0" prefWidth="241.0" promptText="Date of Birth" />
-                        <TextField fx:id="username111" prefHeight="30.0" prefWidth="220.0" promptText="Address" styleClass="text-field" />
+                        <TextField fx:id="usernameField" prefHeight="30.0" prefWidth="220.0" promptText="Username" styleClass="text-field" />
+                        <TextField fx:id="nameField" prefHeight="30.0" prefWidth="220.0" promptText="Name" styleClass="text-field" />
+                        <TextField fx:id="phoneField" prefHeight="30.0" prefWidth="220.0" promptText="Phone" styleClass="text-field" />
+                        <PasswordField fx:id="passwordField" prefHeight="30.0" prefWidth="220.0" promptText="Password" />
+                        <TextField fx:id="accountNumberField" prefHeight="30.0" prefWidth="220.0" promptText="Account No." styleClass="text-field" />
+                        <DatePicker fx:id="dobPicker" prefHeight="28.0" prefWidth="241.0" promptText="Date of Birth" />
+                        <TextField fx:id="addressField" prefHeight="30.0" prefWidth="220.0" promptText="Address" styleClass="text-field" />
                         <ComboBox fx:id="genderCombo" prefHeight="25.0" prefWidth="200.0" promptText="Select gender" stylesheets="@loginDesing.css" />
                         <HBox fx:id="hbox" alignment="CENTER" prefHeight="35.0" prefWidth="237.0" spacing="25.0">
                            <children>
@@ -58,7 +58,7 @@
                         <HBox fx:id="hbox1" alignment="CENTER" prefHeight="35.0" prefWidth="237.0" spacing="1.0">
                            <children>
                               <Label fx:id="already" text="Already have an account" />
-                              <Hyperlink fx:id="login" onAction="#backtologin" text="login" />
+                              <Hyperlink fx:id="login" text="login" onAction="#switchToLogin" />
                            </children>
                         </HBox>
                      </children>
