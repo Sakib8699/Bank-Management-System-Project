@@ -51,3 +51,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-border-color: #A020F0;
     -fx-text-fill: #A020F0;
 }
+
+
+.sign-up{
+    -fx-background-color: #fff;
+}

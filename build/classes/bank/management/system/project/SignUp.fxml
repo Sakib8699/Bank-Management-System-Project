@@ -58,7 +58,7 @@
                         <HBox fx:id="hbox1" alignment="CENTER" prefHeight="35.0" prefWidth="237.0" spacing="1.0">
                            <children>
                               <Label fx:id="already" text="Already have an account" />
-                              <Hyperlink fx:id="login" text="login" />
+                              <Hyperlink fx:id="login" onAction="#backtologin" text="login" />
                            </children>
                         </HBox>
                      </children>
