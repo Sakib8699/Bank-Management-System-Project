@@ -37,7 +37,7 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="singupBtn" layoutX="85.0" layoutY="336.0" mnemonicParsing="false" onAction="#SingUp" prefHeight="30.0" prefWidth="57.0" styleClass="login-button" stylesheets="@loginDesing.css" text="Sign up" textFill="#3f3333">
+                  <Button fx:id="signupBtn" layoutX="85.0" layoutY="336.0" mnemonicParsing="false" onAction="#SignUp" prefHeight="30.0" prefWidth="57.0" styleClass="login-button" stylesheets="@loginDesing.css" text="Sign up" textFill="#3f3333">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
