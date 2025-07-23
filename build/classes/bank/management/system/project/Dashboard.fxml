@@ -68,7 +68,7 @@
                                           <Font size="29.0" />
                                        </font>
                                     </Button>
-                                    <Label layoutX="51.0" layoutY="509.0" text="Sin Out" textFill="WHITE" />
+                                    <Label layoutX="51.0" layoutY="509.0" text="Sign Out" textFill="WHITE" />
                                     <Label layoutX="66.0" layoutY="69.0" prefHeight="90.0" prefWidth="63.0" text="👤" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="62.0" />
@@ -88,13 +88,18 @@
                                     <String fx:value="white-bg" />
                                  </styleClass>
                                  <children>
-                                    <TableView layoutX="32.0" layoutY="29.0" prefHeight="440.0" prefWidth="803.0">
-                                      <columns>
-                                        <TableColumn prefWidth="75.0" text="C1" />
-                                        <TableColumn prefWidth="75.0" text="C2" />
-                                      </columns>
-                                    </TableView>
-                                 </children>
+                                <TableView fx:id="userTable" layoutY="1.0" prefHeight="516.0" prefWidth="873.0">
+                                        <columns>
+                          <TableColumn fx:id="usernameCol" prefWidth="94.0" text="Username" />
+    <TableColumn fx:id="nameCol" prefWidth="129.33334350585938" text="Name" />
+    <TableColumn fx:id="phoneCol" prefWidth="118.00006103515625" text="Phone" />
+    <TableColumn fx:id="passwordCol" minWidth="0.0" prefWidth="106.0" text="Password" />
+    <TableColumn fx:id="accountNoCol" minWidth="0.0" prefWidth="81.33331298828125" text="Account No." />
+    <TableColumn fx:id="dobCol" minWidth="2.00006103515625" prefWidth="78.0" text="Date of Birth" />
+    <TableColumn fx:id="addressCol" minWidth="0.0" prefWidth="121.33331298828125" text="Address" />
+    <TableColumn fx:id="genderCol" minWidth="0.0" prefWidth="142.66670735677087" text="Gender" />
+  </columns>
+</TableView>                                 </children>
                               </AnchorPane>
                            </children>
                         </AnchorPane>
