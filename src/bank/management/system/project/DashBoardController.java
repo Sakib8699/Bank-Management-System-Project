@@ -1,5 +1,6 @@
 package bank.management.system.project;
 
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,17 +21,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.scene.control.Alert;
 
 public class DashBoardController implements Initializable {
 
-    // UI Components
     @FXML private Button dbBtn;
     @FXML private Button avabtn;
     @FXML private Button logOutBtn;
     @FXML private Button minimize;
     @FXML private Button close;
+    @FXML private Button dep;
     
-    // Table Components
     @FXML private TableView<User> userTable;
     @FXML private TableColumn<User, String> usernameCol;
     @FXML private TableColumn<User, String> nameCol;
@@ -44,11 +45,23 @@ public class DashBoardController implements Initializable {
     private double x = 0;
     private double y = 0;
     private ObservableList<User> userList = FXCollections.observableArrayList();
+    private String username;
+    private String accountNumber;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initializeTableColumns();
         loadUserData();
+    }
+
+    public void setUserData(String username, String accountNumber) {
+        if (username == null || accountNumber == null) {
+            System.err.println("Warning: Username or account number is null");
+            return;
+        }
+        this.username = username;
+        this.accountNumber = accountNumber;
+        System.out.println("Dashboard received user data - Username: " + username + ", Account: " + accountNumber);
     }
 
     private void initializeTableColumns() {
@@ -63,12 +76,13 @@ public class DashBoardController implements Initializable {
             genderCol.setCellValueFactory(new PropertyValueFactory<>("gender"));
         } catch (Exception e) {
             System.err.println("Error initializing table columns: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
     private void loadUserData() {
         try (Connection connect = database.ConnectDB();
-             PreparedStatement statement = connect.prepareStatement("SELECT * FROM users");
+             PreparedStatement statement = connect.prepareStatement("SELECT * FROM user");
              ResultSet result = statement.executeQuery()) {
             
             userList.clear();
@@ -80,8 +94,8 @@ public class DashBoardController implements Initializable {
                     result.getString("phone"),
                     result.getString("password"),
                     result.getString("account_number"),
-                    result.getString("Dob"),
-                    result.getString("Address"),
+                    result.getString("dob"),
+                    result.getString("address"),
                     result.getString("gender")
                 ));
             }
@@ -95,7 +109,6 @@ public class DashBoardController implements Initializable {
         }
     }
 
-    // Navigation Methods
     @FXML
     private void openDb(ActionEvent event) {
         loadScene(event, "Home.fxml");
@@ -103,7 +116,17 @@ public class DashBoardController implements Initializable {
 
     @FXML
     private void handAvaRoom(ActionEvent event) {
-        loadScene(event, "AddEmployees.fxml");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AddEmployees.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            setupDraggableWindow(root, stage);
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Error loading AddEmployees: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -111,7 +134,33 @@ public class DashBoardController implements Initializable {
         loadScene(event, "Login.fxml");
     }
 
-    // Window Control Methods
+    @FXML
+    private void operations(ActionEvent event) {
+        try {
+            if (accountNumber == null || username == null) {
+                System.err.println("Error: User data not set before opening AccountOperations");
+                showAlert("Error", "User data not available. Please log in again.");
+                return;
+            }
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AccountOperations.fxml"));
+            Parent root = loader.load();
+            
+            // Pass user data to AccountOperationsController
+            AccountOperationsController controller = loader.getController();
+            controller.setUserData(username, accountNumber);
+            
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            setupDraggableWindow(root, stage);
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Error loading AccountOperations: " + e.getMessage());
+            e.printStackTrace();
+            showAlert("Error", "Failed to open account operations");
+        }
+    }
+
     @FXML
     private void mini(ActionEvent event) {
         ((Stage) ((Node) event.getSource()).getScene().getWindow()).setIconified(true);
@@ -128,26 +177,37 @@ public class DashBoardController implements Initializable {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             setupDraggableWindow(root, stage);
             stage.setScene(new Scene(root));
+            stage.show();
         } catch (Exception e) {
             System.err.println("Error loading scene: " + e.getMessage());
+            e.printStackTrace();
+            showAlert("Error", "Failed to load " + fxmlFile);
         }
     }
 
     private void setupDraggableWindow(Parent root, Stage stage) {
-        root.setOnMousePressed(event -> {
+        root.setOnMousePressed((MouseEvent event) -> {
             x = event.getSceneX();
             y = event.getSceneY();
         });
 
-        root.setOnMouseDragged(event -> {
+        root.setOnMouseDragged((MouseEvent event) -> {
             stage.setX(event.getScreenX() - x);
             stage.setY(event.getScreenY() - y);
             stage.setOpacity(0.8);
         });
 
-        root.setOnMouseReleased(event -> {
+        root.setOnMouseReleased((MouseEvent event) -> {
             stage.setOpacity(1);
         });
+    }
+    
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     // User Model Class

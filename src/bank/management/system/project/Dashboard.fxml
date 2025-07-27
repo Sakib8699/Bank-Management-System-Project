@@ -74,6 +74,7 @@
                                           <Font name="System Bold" size="62.0" />
                                        </font>
                                     </Label>
+                                    <Button fx:id="dep" layoutX="14.0" layoutY="297.0" mnemonicParsing="false" onAction="#operations" prefHeight="30.0" prefWidth="171.0" styleClass="button-custom" stylesheets="@dashboardDesign.css" text="Deposite/withdraw" textAlignment="CENTER" wrapText="true" />
                                  </children>
                               </AnchorPane>
                            </children>
