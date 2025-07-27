@@ -49,11 +49,7 @@ public class LoginController implements Initializable {
             String pass = password.getText();
             
             if (user.isEmpty() || pass.isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("Please fill in all fields");
-                alert.showAndWait();
+                showAlert("Error", "Please fill in all fields");
                 return;
             }
             
@@ -67,8 +63,14 @@ public class LoginController implements Initializable {
                 ResultSet result = prepare.executeQuery();
                 
                 if (result.next()) {
+                    String accountNumber = result.getString("account_number");
+                    
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
                     Parent root = loader.load();
+                    
+                    DashBoardController dashboardController = loader.getController();
+                    dashboardController.setUserData(user, accountNumber);
+                    
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     
                     root.setOnMousePressed((MouseEvent e) -> {
@@ -88,17 +90,17 @@ public class LoginController implements Initializable {
                     
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
+                    stage.show();
                 } else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Wrong username/password");
-                    alert.showAndWait();
+                    showAlert("Error", "Wrong username/password");
                 }
                 connect.close();
+            } else {
+                showAlert("Database Error", "Failed to connect to database");
             }
         } catch (Exception e) {
             e.printStackTrace();
+            showAlert("Error", "An error occurred during login");
         }
     }
 
@@ -126,13 +128,23 @@ public class LoginController implements Initializable {
 
             Scene scene = new Scene(root);
             stage.setScene(scene);
+            stage.show();
         } catch (Exception e) {
             e.printStackTrace();
+            showAlert("Error", "Failed to load sign up form");
         }
     }
     
     @FXML
     private void cancel(ActionEvent event) {
         System.exit(0);
+    }
+    
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

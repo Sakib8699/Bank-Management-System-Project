@@ -11,7 +11,7 @@ public class database {
     
         try{
         Class.forName("com.mysql.jdbc.Driver");
-        Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/bankDb", "root", "");
+        Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/bankDb1", "root", "");
         System.out.println("Database connected");
         return connect;
         

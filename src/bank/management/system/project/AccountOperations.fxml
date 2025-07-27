@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="bank.management.system.project.AccountOperationsController"
+            prefHeight="550.0" prefWidth="700.0"
+            style="-fx-background-color: #f4f4f4;">
+    <children>
+        <AnchorPane layoutX="0.0" layoutY="0.0" prefHeight="50.0" prefWidth="700.0"
+                    style="-fx-background-color: #A020F0;">
+            <children>
+                <Label layoutX="20.0" layoutY="15.0" text="Account Operations"
+                       textFill="white" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+                <HBox alignment="CENTER_RIGHT" layoutX="330.0" layoutY="12.0"
+                      spacing="10.0" prefWidth="360.0">
+                    <children>
+                        <Button fx:id="refreshButton" onAction="#refreshData"
+                                text="Refresh"
+                                style="-fx-background-color: #2980b9; -fx-text-fill: white;" />
+                        <Button fx:id="backButton" onAction="#goBack"
+                                text="Back"
+                                style="-fx-background-color: #27ae60; -fx-text-fill: white;" />
+                        <Button fx:id="logoutButton" onAction="#logout"
+                                text="Logout"
+                                style="-fx-background-color: #c0392b; -fx-text-fill: white;" />
+                    </children>
+                </HBox>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="20.0" layoutY="60.0" prefHeight="100.0" prefWidth="660.0"
+                    style="-fx-background-color: white; -fx-border-color: #dcdcdc; -fx-padding: 10;">
+            <children>
+                <Label layoutX="20.0" layoutY="10.0" text="Account Information"
+                       style="-fx-font-size: 16px; -fx-font-weight: bold;" textFill="#333333" />
+                <HBox layoutX="20.0" layoutY="40.0" spacing="50.0">
+                    <children>
+                        <VBox spacing="5.0">
+                            <children>
+                                <Label text="Account Number:" textFill="#666666" />
+                                <Label fx:id="accountNumberLabel" textFill="#333333" />
+                            </children>
+                        </VBox>
+                        <VBox spacing="5.0">
+                            <children>
+                                <Label text="Customer Name:" textFill="#666666" />
+                                <Label fx:id="customerNameLabel" textFill="#333333" />
+                            </children>
+                        </VBox>
+                        <VBox spacing="5.0">
+                            <children>
+                                <Label text="Current Balance:" textFill="#666666" />
+                                <Label fx:id="currentBalanceLabel" textFill="#333333" />
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+            </children>
+        </AnchorPane>
+        <HBox layoutX="20.0" layoutY="180.0" spacing="20.0">
+            <children>
+                <VBox spacing="10.0" prefWidth="320.0"
+                      style="-fx-background-color: white; -fx-padding: 10; -fx-border-color: #dcdcdc;">
+                    <children>
+                        <Label text="Deposit Money"
+                               style="-fx-font-size: 14px; -fx-font-weight: bold;" textFill="#333333" />
+                        <Label text="Amount:" textFill="#666666" />
+                        <TextField fx:id="depositAmountField"
+                                   promptText="Enter deposit amount"
+                                   style="-fx-border-color: #cccccc;" />
+                        <Button fx:id="depositButton" onAction="#handleDeposit" text="Deposit"
+                                style="-fx-background-color: #3498db; -fx-text-fill: white;" />
+                    </children>
+                </VBox>
+                <VBox spacing="10.0" prefWidth="320.0"
+                      style="-fx-background-color: white; -fx-padding: 10; -fx-border-color: #dcdcdc;">
+                    <children>
+                        <Label text="Transfer Money"
+                               style="-fx-font-size: 14px; -fx-font-weight: bold;" textFill="#333333" />
+                        <Label text="To Account:" textFill="#666666" />
+                        <TextField fx:id="transferAccountField" promptText="Enter account number"
+                                   style="-fx-border-color: #cccccc;" />
+                        <Label text="Amount:" textFill="#666666" />
+                        <TextField fx:id="transferAmountField" promptText="Enter transfer amount"
+                                   style="-fx-border-color: #cccccc;" />
+                        <Button fx:id="transferButton" onAction="#handleTransfer" text="Transfer"
+                                style="-fx-background-color: #f39c12; -fx-text-fill: white;" />
+                        <Label text="Withdraw Money"
+                               style="-fx-font-size: 14px; -fx-font-weight: bold;" textFill="#333333" />
+                        <Label text="Amount:" textFill="#666666" />
+                        <TextField fx:id="withdrawAmountField" promptText="Enter withdrawal amount"
+                                   style="-fx-border-color: #cccccc;" />
+                        <Button fx:id="withdrawButton" onAction="#handleWithdraw" text="Withdraw"
+                                style="-fx-background-color: #e74c3c; -fx-text-fill: white;" />
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+        <AnchorPane layoutX="20.0" layoutY="380.0" prefHeight="150.0" prefWidth="660.0"
+                    style="-fx-background-color: white; -fx-padding: 10; -fx-border-color: #dcdcdc;">
+            <children>
+                <Label layoutX="10.0" layoutY="10.0" text="Recent Transactions"
+                       style="-fx-font-size: 14px; -fx-font-weight: bold;" textFill="#333333" />
+                <TableView fx:id="transactionTable" layoutX="10.0" layoutY="35.0" prefWidth="640.0" prefHeight="100.0">
+                    <columns>
+                        <TableColumn fx:id="transactionIdCol" prefWidth="60.0" text="ID" />
+                        <TableColumn fx:id="transactionTypeCol" prefWidth="100.0" text="Type" />
+                        <TableColumn fx:id="amountCol" prefWidth="100.0" text="Amount" />
+                        <TableColumn fx:id="balanceCol" prefWidth="120.0" text="Balance" />
+                        <TableColumn fx:id="dateCol" prefWidth="120.0" text="Date" />
+                    </columns>
+                </TableView>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
